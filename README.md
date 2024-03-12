@@ -14,7 +14,8 @@ Multedio is our ambitious project aimed at creating a feature-rich Lightroom dup
 
 ## Project Imaginary:
 
-Take a sneak peek at our project's introductory base:
+### Take a sneak peek at our project's introductory base:
+![](https://github.com/completelyblank/Multedio/blob/main/src/Multedio_Open.gif)
 
 ## List:
 
