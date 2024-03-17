@@ -6,7 +6,7 @@
 
 - Muhammad Raza Khan (completelyblank)
 - Amna Shah (amnashah110)
-- Amna Mubashir (_)
+- Amna Mubashir (Amnamubashir)
 
 ## Project Description:
 
@@ -42,6 +42,17 @@ A comprehensive testing phase involves conducting unit tests for each feature, p
 ### Documentation:
 
 Clear documentation for UI/UX design decisions, implementation details, and code structure is essential. We'll develop beginner-friendly user manuals and guides for Multedio, including troubleshooting tips for common user issues.
+
+### How to run (Linux):
+*) Go to terrminal
+*) cd to Project Directory
+*) Install GTK and openCV libraries for Linux (Commands may vary on type of OS)
+*) Run make file using the command: "make"
+*) Run the Object File using the commands: ./test.o
+*) Check it Out!
+
+### How to run (Windows):
+tbd
 
 ### Future Enhancements (Optional):
 
