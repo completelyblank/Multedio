@@ -7,7 +7,7 @@ using namespace cv;
 Mat background;
 
 int main(int argc, char *argv[]) {
-    background = imread("Multedio.png");
+    background = imread("src/Multedio.png");
     resize(background, background, Size(900, 500));
 
     Mat mainWindow(500, 900, CV_8UC3, Scalar(51, 138, 255));
@@ -19,4 +19,3 @@ int main(int argc, char *argv[]) {
 
     waitKey(0);
 }
-
