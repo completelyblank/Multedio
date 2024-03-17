@@ -3,4 +3,3 @@ objFile:
 
 run: objFile
 	./test.o
-
