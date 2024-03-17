@@ -37,14 +37,14 @@ void callbackFunc(int event, int x, int y, int flags, void* userdata) {
 
     if (x > 295 && x < 600 && y > 335 && y < 410) {
         setCursor(gdk_get_default_root_window(), handCursor);
-        background = imread("Multedio Hover.png");
+        background = imread("src/Multedio Hover.png");
         if (event == EVENT_LBUTTONDOWN) {
             setCursor(gdk_get_default_root_window(), watchCursor);
             openFile(nullptr, nullptr);
         }
     } else {
         setCursor(gdk_get_default_root_window(), arrowCursor);
-        background = imread("Multedio.png"); 
+        background = imread("src/Multedio.png"); 
     }
 
     resize(background, background, Size(900, 500));
@@ -53,4 +53,3 @@ void callbackFunc(int event, int x, int y, int flags, void* userdata) {
     background.copyTo(backgroundROI);
     imshow("Main Window", mainWindow);
 }
-
