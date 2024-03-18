@@ -29,7 +29,14 @@ Our project structure is set up for easy navigation, and basic UI components usi
 
 ### Features:
 
-Presets for quick edits, brightness and opacity controls, and grayscale filter options have been implemented. Future tasks include exploring contrast adjustment, undo/redo functionality, and potentially adding tooltips for user guidance.
+*) Brightness
+*) Contrast
+*) Color Manipulation
+*) Cropping & Rotation
+*) Noise Reduction
+*) Sharpening
+*) Revert to Orignal & Go to latest
+*) Presets
 
 ### Operating System Concepts (Simplified):
 
