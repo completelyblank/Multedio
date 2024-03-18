@@ -2,13 +2,12 @@
 
 # Multedio - Lightroom Duplicate Project
 
-## Partners:
+## Partners
+- Muhammad Raza Khan ([completelyblank](https://github.com/completelyblank))
+- Amna Shah ([amnashah110](https://github.com/amnashah110))
+- Amna Mubashir ([Amnamubashir](https://github.com/Amnamubashir))
 
-- Muhammad Raza Khan (completelyblank)
-- Amna Shah (amnashah110)
-- Amna Mubashir (Amnamubashir)
-
-## Project Description:
+## Project Description
 
 Multedio is our ambitious project aimed at creating a feature-rich Lightroom duplicate. Leveraging GTK and OpenCV libraries in C, we intend to enhance the user experience with advanced features such as presets, brightness adjustments, opacity changes, grayscale transformations, and more. The Figma-designed user interface (UI) will be seamlessly implemented using GTK, providing a visually appealing and intuitive platform for image editing. Our project delves into key operating system (OS) concepts, including multiprocessing, interprocess communication (IPC), multithreading, and other relevant aspects.
 
@@ -16,53 +15,72 @@ Multedio is our ambitious project aimed at creating a feature-rich Lightroom dup
 
 ### Take a sneak peek at our project's introductory base:
 ![](https://github.com/completelyblank/Multedio/blob/main/src/Multedio_Open.gif)
+### List of Components:
 
-## List:
+1. **User Interface Design (Figma):**
+   - Wireframe main interface components and design user-friendly UI elements for presets, brightness, opacity, grayscale, etc.
+   - Utilize a carefully chosen color scheme to enhance the user experience.
+   - Implement intuitive icons for visual recognition.
+   - Explore responsive design principles for adaptability to various screen sizes.
 
-### User Interface Design (Figma):
+2. **Implementation (GTK/OpenCV in C):**
+   - Set up project structure for easy navigation.
+   - Develop basic UI components using GTK.
+   - Integrate OpenCV for image processing.
+   - Implement robust error handling and memory management.
 
-We aim to wireframe the main interface components and design user-friendly UI elements for presets, brightness, opacity, grayscale, etc. A carefully chosen color scheme enhances the user experience, while intuitive icons aid visual recognition. Additionally, we may explore responsive design principles for adaptability to various screen sizes.
+3. **Features:**
+   - Brightness adjustments
+   - Contrast modifications
+   - Color manipulation
+   - Cropping & rotation
+   - Noise reduction
+   - Sharpening
+   - Revert to original & Go to latest
+   - Presets
 
-### Implementation (GTK/OpenCV in C):
+4. **Operating System Concepts (Simplified):**
+   - Explore multiprocessing techniques.
+   - Implement inter-process communication.
+   - Integrate basic multithreading for concurrent tasks.
+   - Address OS-specific error handling.
 
-Our project structure is set up for easy navigation, and basic UI components using GTK are underway. The integration of OpenCV for image processing, along with robust error handling and memory management, is a priority to ensure a stable application.
+5. **Testing:**
+   - Conduct unit tests for each feature.
+   - Perform integration testing for seamless functionality.
+   - Ensure compatibility across different operating systems.
+   - Implement stress testing for performance evaluation.
 
-### Features:
+6. **Documentation:**
+   - Provide clear documentation for UI/UX design decisions, implementation details, and code structure.
+   - Develop beginner-friendly user manuals and guides for Multedio.
+   - Include troubleshooting tips for common user issues.
 
-*) Brightness
-*) Contrast
-*) Color Manipulation
-*) Cropping & Rotation
-*) Noise Reduction
-*) Sharpening
-*) Revert to Orignal & Go to latest
-*) Presets
+### How to Run (Linux):
 
-### Operating System Concepts (Simplified):
+1. Open a terminal.
+2. Navigate to the project directory.
+3. Install GTK and OpenCV libraries for Linux (Commands may vary based on the Linux distribution).
+4. Run the makefile using the command: `make`.
+5. Execute the object file using the command: `./test.o`.
+6. Explore Multedio!
 
-We plan to explore multiprocessing techniques, implement inter-process communication, and integrate basic multithreading for concurrent tasks. Additionally, we will investigate and address OS-specific error handling.
-
-### Testing:
-
-A comprehensive testing phase involves conducting unit tests for each feature, performing integration testing for seamless functionality, ensuring compatibility across different operating systems, and implementing stress testing for performance evaluation.
-
-### Documentation:
-
-Clear documentation for UI/UX design decisions, implementation details, and code structure is essential. We'll develop beginner-friendly user manuals and guides for Multedio, including troubleshooting tips for common user issues.
-
-### How to run (Linux):
-*) Go to terrminal
-*) cd to Project Directory
-*) Install GTK and openCV libraries for Linux (Commands may vary on type of OS)
-*) Run make file using the command: "make"
-*) Run the Object File using the commands: ./test.o
-*) Check it Out!
-
-### How to run (Windows):
-tbd
+### How to Run (Windows):
+*(To be determined)*
 
 ### Future Enhancements (Optional):
+- Explore additional image processing features.
+- Consider local storage integration.
+- Investigate AI-based image enhancement algorithms.
+- Add localization support for multiple languages.
+- Evaluate keyboard shortcuts for power users.
 
-Exploration of additional image processing features, consideration for local storage integration, investigation into AI-based image enhancement algorithms, localization support for multiple languages, and evaluation of keyboard shortcuts for power users are optional enhancements for the future.
+---
 
 This readme file serves as a roadmap for the Multedio project, highlighting our goals, progress, and future plans. Regular collaboration and feedback sessions will play a crucial role in the successful development of this innovative Lightroom duplicate.
+
+**Make sure to check out our [GitHub repository](https://github.com/completelyblank/Multedio) for the latest updates and contributions!**
+
+---
+
+Feel free to adjust or expand upon this README according to your project's needs!
