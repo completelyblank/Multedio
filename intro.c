@@ -29,26 +29,33 @@ void openFile(GtkWidget *widget, gpointer data) //selects image file and display
     }
 }
 
-void setCursor(GdkWindow *window, GdkCursor *cursor) {
+void setCursor(GdkWindow *window, GdkCursor *cursor) //cursor event 
+{
     gdk_window_set_cursor(window, cursor);
 }
 
-void callbackFunc(int event, int x, int y, int flags, void* userdata) {
-    if (event == EVENT_LBUTTONDOWN) {
+void callbackFunc(int event, int x, int y, int flags, void* userdata) 
+{
+    if (event == EVENT_LBUTTONDOWN) 
+    {
         cout << "Mouse clicked at: (" << x << ", " << y << ")" << endl;
     }
+    
     GdkCursor *handCursor = gdk_cursor_new_for_display(gdk_display_get_default(), GDK_HAND2);
     GdkCursor *arrowCursor = gdk_cursor_new_for_display(gdk_display_get_default(), GDK_ARROW);
     GdkCursor *watchCursor = gdk_cursor_new_for_display(gdk_display_get_default(), GDK_WATCH);
 
-    if (x > 295 && x < 600 && y > 335 && y < 410) {
+    if (x > 295 && x < 600 && y > 335 && y < 410) //if the x and y coordinates are on the button 
+    {
         setCursor(gdk_get_default_root_window(), handCursor);
-        background = imread("Multedio Hover.png");
-        if (event == EVENT_LBUTTONDOWN) {
+        background = imread("Multedio Hover.png"); //animation effect
+        if (event == EVENT_LBUTTONDOWN) //if you press the button
+        {
             setCursor(gdk_get_default_root_window(), watchCursor);
-            openFile(nullptr, nullptr);
+            openFile(nullptr, nullptr); //file opens //doesnt do anything rn
         }
-    } else {
+    } else //if cursor not on button
+    {
         setCursor(gdk_get_default_root_window(), arrowCursor);
         background = imread("Multedio.png"); 
     }
