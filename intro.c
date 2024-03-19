@@ -48,7 +48,7 @@ void callbackFunc(int event, int x, int y, int flags, void* userdata)
     if (x > 295 && x < 600 && y > 335 && y < 410) //if the x and y coordinates are on the button 
     {
         setCursor(gdk_get_default_root_window(), handCursor);
-        background = imread("Multedio Hover.png"); //animation effect
+        background = imread("src/Multedio Hover.png"); //animation effect
         if (event == EVENT_LBUTTONDOWN) //if you press the button
         {
             setCursor(gdk_get_default_root_window(), watchCursor);
@@ -57,7 +57,7 @@ void callbackFunc(int event, int x, int y, int flags, void* userdata)
     } else //if cursor not on button
     {
         setCursor(gdk_get_default_root_window(), arrowCursor);
-        background = imread("Multedio.png"); 
+        background = imread("src/Multedio.png"); 
     }
 
     resize(background, background, Size(900, 500));
