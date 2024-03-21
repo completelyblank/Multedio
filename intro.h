@@ -8,9 +8,9 @@ using namespace cv;
 
 extern Mat background;
 
-void openFile(GtkWidget *widget, gpointer data);
+char* openFile(GtkWidget *widget, gpointer data);
 void setCursor(GdkWindow *window, GdkCursor *cursor);
 void callbackFunc(int event, int x, int y, int flags, void* userdata);
+void mainWindow();
 
 #endif 
-
