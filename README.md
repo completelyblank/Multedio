@@ -27,6 +27,7 @@ Multedio is our ambitious project aimed at creating a feature-rich Lightroom dup
    - Set up project structure for easy navigation.
    - Develop basic UI components using GTK.
    - Integrate OpenCV for image processing.
+   - Integrate a Formula using GTK and direct porportion to resize to different Screen Sizes
    - Implement robust error handling and memory management.
 
 3. **Features:**
