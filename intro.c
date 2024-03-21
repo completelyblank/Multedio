@@ -9,6 +9,8 @@ GdkCursor *arrowCursor;
 GdkCursor *watchCursor;
 gint width;
 gint height;
+gint scaledWidth;
+gint scaledHeight;
 
 void initializeCursors() {
 	// Initialize GdkCursor variables
@@ -24,6 +26,8 @@ void backgroundCode() {
 	// Get screen width and height
 	width = gdk_screen_get_width(screen);
 	height = gdk_screen_get_height(screen);
+	scaledWidth = width / 1366;
+	scaledHeight = height / 675;
 }
 
 void show(Mat background) {
@@ -80,7 +84,7 @@ void upload(int event, int x, int y, int flags, void* userdata)
         	cout << "Mouse clicked at: (" << x << ", " << y << ")" << endl;
     	}
     	
-    	if (x > 315 && x < 715 && y > 255 && y < 335) 
+    	if (x > 315*scaledWidth && x < 715*scaledWidth && y > 255*scaledHeight && y < 335*scaledHeight) 
     	{
     		setCursor(gdk_get_default_root_window(), handCursor);
         	background = imread("src/Upload Hover.png"); //animation effect
@@ -116,7 +120,7 @@ void getStarted(int event, int x, int y, int flags, void* userdata)
         	cout << "Mouse clicked at: (" << x << ", " << y << ")" << endl;
     	}
 
-    	if (x > 295 && x < 600 && y > 335 && y < 410) //if the x and y coordinates are on the button 
+    	if (x > 295*scaledWidth && x < 600*scaledWidth && y > 335*scaledHeight && y < 410*scaledHeight) //if the x and y coordinates are on the button 
     	{
         	setCursor(gdk_get_default_root_window(), handCursor);
         	background = imread("src/Multedio Hover.png"); //animation effect
