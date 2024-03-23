@@ -7,10 +7,24 @@ using namespace std;
 GdkCursor *handCursor;
 GdkCursor *arrowCursor;
 GdkCursor *watchCursor;
-gint width;
-gint height;
-gint scaledWidth;
-gint scaledHeight;
+gfloat width;
+gfloat height;
+gfloat scaledWidth;
+gfloat scaledHeight;
+Mat hovering[9];
+
+void initializeHoveringPNGs() {
+	// load assets
+    	hovering[0] = imread("src/Temperature_Hover.png");
+    	hovering[1] = imread("src/Tint_Hover.png");
+    	hovering[2] = imread("src/Exposure_Hover.png");
+    	hovering[3] = imread("src/Crop_Hover.png");
+    	hovering[4] = imread("src/Preset_Hover.png");
+    	hovering[5] = imread("src/Noise_R_Hover.png");
+    	hovering[6] = imread("src/Vignette_Hover.png");
+    	hovering[7] = imread("src/Brightness_Hover.png");
+    	hovering[8] = imread("src/Color_Manipulation_Hover.png");
+}
 
 void initializeCursors() {
 	// Initialize GdkCursor variables
@@ -31,16 +45,19 @@ void backgroundCode() {
 }
 
 void show(Mat background) {
-	resize(background, background, Size(width*0.75, height*0.75));
-    	Mat mainWindow(height*0.75, width*0.75, CV_8UC3, Scalar(51, 138, 255));
-    	Mat backgroundROI = mainWindow(Rect(0, 0, background.cols, background.rows));
-    	background.copyTo(backgroundROI);
-    	imshow("Multedio", mainWindow);
+	if(!background.empty()) {
+		resize(background, background, Size(width*0.75, height*0.75));
+    		Mat mainWindow(height*0.75, width*0.75, CV_8UC3, Scalar(51, 138, 255));
+    		Mat backgroundROI = mainWindow(Rect(0, 0, background.cols, background.rows));
+    		background.copyTo(backgroundROI);
+    		imshow("Multedio", mainWindow);
+	} else {
+		cout << "Failed to load\n";
+	}
 }
 
 char* openFile(GtkWidget *widget, gpointer data) //selects image file and displays in open window
 {
-
 	backgroundCode();
 	char* filename = nullptr;
 	
@@ -67,12 +84,51 @@ void setCursor(GdkWindow *window, GdkCursor *cursor) //cursor event
 	gdk_window_set_cursor(window, cursor);
 }
 
-void station(int event, int x, int y, int flags, void* userdata) 
-{
-	char *filename = (char*)userdata;
-	background = imread(filename); // image load
+void station(int event, int x, int y, int flags, void* userdata) {
+	// Load the background image
+    	Mat background = imread("src/Station.png");
+    	if (event == EVENT_LBUTTONDOWN) 
+    	{
+        	cout << "Mouse clicked at: (" << x << ", " << y << ")" << endl;
+    	}
+    	
+    	if (y > 148*scaledHeight && y < 220*scaledHeight) {
+		if (x > 63*scaledWidth && x < 147*scaledHeight) {
+			background = hovering[0];
+			setCursor(gdk_get_default_root_window(), handCursor);
+		} else if (x > 208*scaledWidth && x < 289*scaledHeight) {
+			background = hovering[1];
+			setCursor(gdk_get_default_root_window(), handCursor);
+		} else if (x > 349*scaledWidth && x < 434*scaledHeight) {
+			background = hovering[2];
+			setCursor(gdk_get_default_root_window(), handCursor);
+		}
+	} else if (y > 264*scaledHeight && y < 334*scaledHeight) {
+		if (x > 63*scaledWidth && x < 147*scaledHeight) {
+			background = hovering[3];
+			setCursor(gdk_get_default_root_window(), handCursor);
+		} else if (x > 208*scaledWidth && x < 289*scaledHeight) {
+			background = hovering[4];
+			setCursor(gdk_get_default_root_window(), handCursor);
+		} else if (x > 349*scaledWidth && x < 434*scaledHeight) {
+			background = hovering[5];
+			setCursor(gdk_get_default_root_window(), handCursor);
+		}
+	} else if (y > 384*scaledHeight && y < 450*scaledHeight) {
+		if (x > 63*scaledWidth && x < 147*scaledHeight) {
+			background = hovering[6];
+			setCursor(gdk_get_default_root_window(), handCursor);
+		} else if (x > 208*scaledWidth && x < 289*scaledHeight) {
+			background = hovering[7];
+			setCursor(gdk_get_default_root_window(), handCursor);
+		} else if (x > 349*scaledWidth && x < 434*scaledHeight) {
+			background = hovering[8];
+			setCursor(gdk_get_default_root_window(), handCursor);
+		}
+	}
 	show(background);
 }
+
 
 void upload(int event, int x, int y, int flags, void* userdata) 
 {
@@ -142,10 +198,11 @@ void getStarted(int event, int x, int y, int flags, void* userdata)
 
 void mainWindow() {
 	gtk_init(NULL, NULL);
-	
+
 	backgroundCode();
     	
     	initializeCursors();
+    	initializeHoveringPNGs();
     	
     	background = imread("src/Multedio.png");  //reads image called Multedio.png from src directory and saves in variable
     	show(background);
