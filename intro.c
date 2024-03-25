@@ -87,6 +87,8 @@ void setCursor(GdkWindow *window, GdkCursor *cursor) //cursor event
 void station(int event, int x, int y, int flags, void* userdata) {
 	// Load the background image
     	Mat background = imread("src/Station.png");
+    	char *filename = (char*)userdata;
+    	Mat image = imread(filename);
     	if (event == EVENT_LBUTTONDOWN) 
     	{
         	cout << "Mouse clicked at: (" << x << ", " << y << ")" << endl;
@@ -102,6 +104,8 @@ void station(int event, int x, int y, int flags, void* userdata) {
 		} else if (x > 349*scaledWidth && x < 434*scaledHeight) {
 			background = hovering[2];
 			setCursor(gdk_get_default_root_window(), handCursor);
+		} else {
+			setCursor(gdk_get_default_root_window(), arrowCursor);
 		}
 	} else if (y > 264*scaledHeight && y < 334*scaledHeight) {
 		if (x > 63*scaledWidth && x < 147*scaledHeight) {
@@ -113,6 +117,8 @@ void station(int event, int x, int y, int flags, void* userdata) {
 		} else if (x > 349*scaledWidth && x < 434*scaledHeight) {
 			background = hovering[5];
 			setCursor(gdk_get_default_root_window(), handCursor);
+		} else {
+			setCursor(gdk_get_default_root_window(), arrowCursor);
 		}
 	} else if (y > 384*scaledHeight && y < 450*scaledHeight) {
 		if (x > 63*scaledWidth && x < 147*scaledHeight) {
@@ -124,9 +130,36 @@ void station(int event, int x, int y, int flags, void* userdata) {
 		} else if (x > 349*scaledWidth && x < 434*scaledHeight) {
 			background = hovering[8];
 			setCursor(gdk_get_default_root_window(), handCursor);
+		} else {
+			setCursor(gdk_get_default_root_window(), arrowCursor);
 		}
+	} else {
+		setCursor(gdk_get_default_root_window(), arrowCursor);
 	}
-	show(background);
+	 resize(background, background, Size(width*0.75, height*0.75));
+	 resize(image, image, Size(470, 472));
+
+	// Create a main window for displaying the result
+    	Mat mainWindow(height*0.75, width*0.75, CV_8UC3, Scalar(51, 138, 255));
+
+    	// Define the position to place the image on top of the background
+    	int imageX = 520; // Adjust these values as needed
+    	int imageY = 16; // Adjust these values as needed
+    
+        Rect imageROI(imageX, imageY, image.cols, image.rows);
+        
+        // Extract the region of interest from the background image
+        Mat backgroundROI = mainWindow(Rect(0, 0, background.cols, background.rows));
+
+        // Copy the background image to the main window
+        background.copyTo(backgroundROI);
+
+        // Place the image on top of the background
+        Mat imageRegion = mainWindow(imageROI);
+        image.copyTo(imageRegion);
+
+	// Show the result
+    	imshow("Multedio", mainWindow);
 }
 
 
@@ -179,7 +212,7 @@ void getStarted(int event, int x, int y, int flags, void* userdata)
     	if (x > 295*scaledWidth && x < 600*scaledWidth && y > 335*scaledHeight && y < 410*scaledHeight) //if the x and y coordinates are on the button 
     	{
         	setCursor(gdk_get_default_root_window(), handCursor);
-        	background = imread("src/Multedio_Hover.png"); //animation effect
+        	background = imread("src/Multedio Hover.png"); //animation effect
         	if (event == EVENT_LBUTTONDOWN) //if you press the button
         	{
             		setCursor(gdk_get_default_root_window(), watchCursor);
