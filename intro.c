@@ -137,14 +137,14 @@ void station(int event, int x, int y, int flags, void* userdata) {
 		setCursor(gdk_get_default_root_window(), arrowCursor);
 	}
 	 resize(background, background, Size(width*0.75, height*0.75));
-	 resize(image, image, Size(470, 472));
+	 resize(image, image, Size(470*scaledWidth, 472*scaledHeight));
 
 	// Create a main window for displaying the result
     	Mat mainWindow(height*0.75, width*0.75, CV_8UC3, Scalar(51, 138, 255));
 
     	// Define the position to place the image on top of the background
-    	int imageX = 520; // Adjust these values as needed
-    	int imageY = 16; // Adjust these values as needed
+    	int imageX = 520 * scaledWidth; // Adjust these values as needed
+    	int imageY = 16 * scaledHeight;// Adjust these values as needed
     
         Rect imageROI(imageX, imageY, image.cols, image.rows);
         
