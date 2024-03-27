@@ -45,7 +45,8 @@ void mainWindow() {
 	gtk_init(NULL, NULL);
 
 	backgroundCode();
-    	
+	clicked = false;
+	
     	initializeCursors();
     	initializeHoveringPNGs();
     	
