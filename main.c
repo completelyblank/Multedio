@@ -15,7 +15,8 @@ gfloat height;
 gfloat scaledWidth;
 gfloat scaledHeight;
 Mat hovering[9];
-
+Mat filters[9];
+bool clicked;
 
 int main() 
 {  
