@@ -1,5 +1,7 @@
 #include "upload.h"
 
+void upload(int event, int x, int y, int flags, void* userdata);
+
 char* openFile(GtkWidget *widget, gpointer data) //selects image file and displays in open window
 {
 	backgroundCode();
@@ -20,6 +22,7 @@ char* openFile(GtkWidget *widget, gpointer data) //selects image file and displa
     	else //image not loaded
     	{
         	gtk_widget_destroy(dialog); //file chooser closed (destroyed)
+        	return nullptr;
     	}
 }
 
@@ -40,7 +43,9 @@ void upload(int event, int x, int y, int flags, void* userdata)
         	if (event == EVENT_LBUTTONDOWN) //if you press the button
         	{
             		char* filename = openFile(nullptr, nullptr);
-            		setMouseCallback("Multedio", station, filename);
+            		if (filename != nullptr) {
+                		setMouseCallback("Multedio", station, filename);
+            		}
         	} /*else 
         	{
 			GdkDragContext* drag_context = (GdkDragContext*)userdata;
