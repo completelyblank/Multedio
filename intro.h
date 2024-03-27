@@ -15,6 +15,8 @@ extern gfloat height;
 extern gfloat scaledWidth;
 extern gfloat scaledHeight;
 extern Mat hovering[9];
+extern Mat filters[9];
+extern bool clicked;
 
 char* openFile(GtkWidget *widget, gpointer data);
 void setCursor(GdkWindow *window, GdkCursor *cursor);
