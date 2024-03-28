@@ -156,8 +156,8 @@ void station(int event, int x, int y, int flags, void* userdata) {
     	Mat mainWindow(height*0.75, width*0.75, CV_8UC3, Scalar(51, 138, 255));
 
     	// Define the position to place the image on top of the background
-    	float imageX = 520*scaledWidth; // Adjust these values as needed
-    	float imageY = 16*scaledHeight; // Adjust these values as needed
+    	int imageX = 520*scaledWidth; // Adjust these values as needed
+    	int imageY = 16*scaledHeight; // Adjust these values as needed
     
         Rect imageROI(imageX, imageY, image.cols, image.rows);
         
