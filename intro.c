@@ -36,23 +36,43 @@ void show(Mat background) {
 	}
 }
 
+
+
 void setCursor(GdkWindow *window, GdkCursor *cursor) //cursor event 
 {
 	gdk_window_set_cursor(window, cursor);
 }
 
-void mainWindow() {
-	gtk_init(NULL, NULL);
 
-	backgroundCode();
-	clicked = false;
-	
-    	initializeCursors();
-    	initializeHoveringPNGs();
-    	
-    	background = imread("src/Multedio.png");  //reads image called Multedio.png from src directory and saves in variable
-    	show(background);
-    	setMouseCallback("Multedio", getStarted, nullptr); //uses callback function from intro.h on Multedio
 
-    	waitKey(0); //waits for user interaction
+void *mainWindow(void *arg) {
+    // Move your existing code inside this function
+    gtk_init(NULL, NULL);
+    backgroundCode();
+    clicked = false;
+    slider = false;
+    dragging = false;
+    sliderValue = 110;
+
+    initializeCursors();
+    initializeHoveringPNGs();
+
+    background = imread("src/Multedio.png");
+    show(background);
+    setMouseCallback("Multedio", getStarted, nullptr);
+
+    // Keep the main loop running
+    gtk_main();
+
+    return NULL;
+}
+
+
+void *mainOther(void *arg) {
+	while (!flag1) {
+        	cout << "Other" << endl;
+        	usleep(1000000);
+    	}
+    	getOther();
+    return NULL;
 }
