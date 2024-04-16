@@ -11,5 +11,6 @@ using namespace std;
 
 char* openFile(GtkWidget *widget, gpointer data);
 void upload(int event, int x, int y, int flags, void* userdata);
+void uploadOther();
 
 #endif
