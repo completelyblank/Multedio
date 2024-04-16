@@ -9,5 +9,6 @@ using namespace cv;
 
 void initializeHoveringPNGs();
 void station(int event, int x, int y, int flags, void* userdata);
+void rendering();
 
 #endif
