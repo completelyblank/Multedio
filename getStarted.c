@@ -8,6 +8,7 @@ void getStarted(int event, int x, int y, int flags, void* userdata)
 	
 	if (event == EVENT_LBUTTONDOWN) 
     	{
+    		flag1 = true;
         	cout << "Mouse clicked at: (" << x << ", " << y << ")" << endl;
     	}
 
@@ -29,4 +30,12 @@ void getStarted(int event, int x, int y, int flags, void* userdata)
     	}
 
     	show(background);
+}
+
+void getOther() {
+	while (!flag2) {
+        	cout << "Next Other" << endl;
+        	usleep(1000000);
+    	}
+    	uploadOther();
 }
