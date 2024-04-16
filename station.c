@@ -49,7 +49,7 @@ void station(int event, int x, int y, int flags, void* userdata) {
     	}
     	
     	if (y > 148*scaledHeight && y < 220*scaledHeight) {
-		if (x > 63*scaledWidth && x < 147*scaledHeight) {
+		if (x > 63*scaledWidth && x < 147*scaledHeight) { // temperature
 			if (!clicked) {
 				background = hovering[0];
 				setCursor(gdk_get_default_root_window(), handCursor);
@@ -59,7 +59,7 @@ void station(int event, int x, int y, int flags, void* userdata) {
 					clicked = true;
 				}
 			}
-		} else if (x > 208*scaledWidth && x < 289*scaledHeight) {
+		} else if (x > 208*scaledWidth && x < 289*scaledHeight) { // tint
 			if (!clicked) {
 				background = hovering[1];
 				setCursor(gdk_get_default_root_window(), handCursor);
@@ -69,7 +69,7 @@ void station(int event, int x, int y, int flags, void* userdata) {
 					clicked = true;
 				}
 			}
-		} else if (x > 349*scaledWidth && x < 434*scaledHeight) {
+		} else if (x > 349*scaledWidth && x < 434*scaledHeight) { // exposure
 			if (!clicked) {
 				background = hovering[2];
 				setCursor(gdk_get_default_root_window(), handCursor);
@@ -83,7 +83,7 @@ void station(int event, int x, int y, int flags, void* userdata) {
 			setCursor(gdk_get_default_root_window(), arrowCursor);
 		}
 	} else if (y > 264*scaledHeight && y < 334*scaledHeight) {
-		if (x > 63*scaledWidth && x < 147*scaledHeight) {
+		if (x > 63*scaledWidth && x < 147*scaledHeight) { // crop
 			if (!clicked) {
 				background = hovering[3];
 				setCursor(gdk_get_default_root_window(), handCursor);
@@ -93,7 +93,7 @@ void station(int event, int x, int y, int flags, void* userdata) {
 					clicked = true;
 				}
 			}
-		} else if (x > 208*scaledWidth && x < 289*scaledHeight) {
+		} else if (x > 208*scaledWidth && x < 289*scaledHeight) { // preset
 			if (!clicked) {
 				background = hovering[4];
 				setCursor(gdk_get_default_root_window(), handCursor);
@@ -103,7 +103,7 @@ void station(int event, int x, int y, int flags, void* userdata) {
 					clicked = true;
 				}
 			}
-		} else if (x > 349*scaledWidth && x < 434*scaledHeight) {
+		} else if (x > 349*scaledWidth && x < 434*scaledHeight) { // noise reduction
 			if (!clicked) {
 				background = hovering[5];
 				setCursor(gdk_get_default_root_window(), handCursor);
@@ -117,7 +117,7 @@ void station(int event, int x, int y, int flags, void* userdata) {
 			setCursor(gdk_get_default_root_window(), arrowCursor);
 		}
 	} else if (y > 384*scaledHeight && y < 450*scaledHeight) {
-		if (x > 63*scaledWidth && x < 147*scaledHeight) {
+		if (x > 63*scaledWidth && x < 147*scaledHeight) { // vignette
 			if (!clicked) {
 				background = hovering[6];
 				setCursor(gdk_get_default_root_window(), handCursor);
@@ -127,7 +127,7 @@ void station(int event, int x, int y, int flags, void* userdata) {
 					clicked = true;
 				}
 			}
-		} else if (x > 208*scaledWidth && x < 289*scaledHeight) {
+		} else if (x > 208*scaledWidth && x < 289*scaledHeight) { // brightness
 			if (!clicked) {
 				background = hovering[7];
 				setCursor(gdk_get_default_root_window(), handCursor);
@@ -137,7 +137,7 @@ void station(int event, int x, int y, int flags, void* userdata) {
 					clicked = true;
 				}
 			}
-		} else if (x > 349*scaledWidth && x < 434*scaledHeight) {
+		} else if (x > 349*scaledWidth && x < 434*scaledHeight) { // color grading
 			if (!clicked) {
 				background = hovering[8];
 				setCursor(gdk_get_default_root_window(), handCursor);
@@ -160,18 +160,36 @@ void station(int event, int x, int y, int flags, void* userdata) {
 		setCursor(gdk_get_default_root_window(), arrowCursor);
 	}
 	
-	if (x > 52*scaledWidth && x < 92*scaledWidth && y > 143*scaledHeight && y < 182*scaledHeight && clicked == true) {
-		setCursor(gdk_get_default_root_window(), handCursor);
-		if (event == EVENT_LBUTTONDOWN) {
-			setCursor(gdk_get_default_root_window(), arrowCursor);
-			clicked = false;
-			slider = false;
-			threadCreated = 2;
-		}
-	}
-	
 	if(clicked) {
 		mouseCallBack();
+		if(x > 88*scaledWidth && x < 133*scaledWidth && y > 301*scaledHeight && y < 340*scaledHeight){
+			setCursor(gdk_get_default_root_window(), handCursor);
+			if (event == EVENT_LBUTTONDOWN) {
+				if(sliderValue > 140) {
+					sliderValue -= 5;
+				}
+			}
+		}
+		else if(x > 356*scaledWidth && x < 405*scaledWidth && y > 299*scaledHeight && y < 341*scaledHeight){
+			setCursor(gdk_get_default_root_window(), handCursor);
+			if (event == EVENT_LBUTTONDOWN) {
+				if(sliderValue < 350) {
+					sliderValue += 5;
+				}
+			}
+		}
+		else if (x > 52*scaledWidth && x < 92*scaledWidth && y > 143*scaledHeight && y < 182*scaledHeight ){
+			setCursor(gdk_get_default_root_window(), handCursor);
+			if (event == EVENT_LBUTTONDOWN) {
+				setCursor(gdk_get_default_root_window(), arrowCursor);
+				clicked = false;
+				slider = false;
+				threadCreated = 2;
+			}
+		}
+		else {
+				setCursor(gdk_get_default_root_window(), arrowCursor);
+		}
 	}
 	
 	resize(background, background, Size(width*0.75, height*0.75));
