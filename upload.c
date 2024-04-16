@@ -32,19 +32,20 @@ void upload(int event, int x, int y, int flags, void* userdata)
 	initializeCursors();
 	
 	if (event == EVENT_LBUTTONDOWN) 
-    	{
+    	{	
         	cout << "Mouse clicked at: (" << x << ", " << y << ")" << endl;
+        	flag2 = true;
     	}
     	
     	if (x > 315*scaledWidth && x < 715*scaledWidth && y > 255*scaledHeight && y < 335*scaledHeight) 
-    	{
+    	{	
     		setCursor(gdk_get_default_root_window(), handCursor);
         	background = imread("src/Upload Hover.png"); //animation effect
         	if (event == EVENT_LBUTTONDOWN) //if you press the button
         	{
             		char* filename = openFile(nullptr, nullptr);
             		if (filename != nullptr) {
-                		setMouseCallback("Multedio", station, filename);
+            			setMouseCallback("Multedio", station, filename);
             		}
         	} /*else 
         	{
@@ -62,4 +63,12 @@ void upload(int event, int x, int y, int flags, void* userdata)
     	}
 	
 	show(background);
+}
+
+void uploadOther() {
+	while (!flag3) {
+        	cout << "Next next Other" << endl;
+        	usleep(1000000);
+    	}
+    	rendering();
 }
