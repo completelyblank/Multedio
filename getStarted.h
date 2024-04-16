@@ -8,5 +8,6 @@
 using namespace cv;
 
 void getStarted(int event, int x, int y, int flags, void* userdata);
+void getOther();
 
 #endif
