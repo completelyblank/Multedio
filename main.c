@@ -3,11 +3,16 @@
 #include "intro.h"
 #include "station.h"
 #include "upload.h"
+#include "brightness.h"
 #include <pthread.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <fcntl.h>
+#include <map>
+#include <functional>
 
 using namespace cv;
+using namespace std;
 
 Mat background; //image variable for background (Multedio's background that we show on opening)
 GdkCursor *handCursor;
@@ -19,28 +24,65 @@ gfloat scaledWidth;
 gfloat scaledHeight;
 Mat hovering[9];
 Mat filters[9];
-bool clicked;
+int clicked[2];
 bool slider;
-int sliderValue;
+int sliderValue[9];
 bool dragging;
 int threadCreated;
 pthread_t threadID;
-int mouseCordx;
+int imageRender;
 int mouseEvent;
 pthread_mutex_t threadMutex;
-int flag1, flag2, flag3, flag4;
+char *flag;
+pthread_t threadIDs[9];
+int draw;
+Mat image;
+int fd[2];
+bool written;
+char *ptr1, *ptr6; 
+int *ptr2, *ptr3, *ptr4;
+Mat *ptr5;
+map<string, function<void(Mat&, int)>> functionMap;
 
 int main() 
 {  
-	flag1 = false;
-	flag2 = false;
-	flag3 = false;
-	flag4 = false;
+	const int SIZE = (20)*sizeof(int);
+	gtk_init(NULL, NULL);
+	int fd, fd2, fd3;
+	char *name = "SHM_OBJECT";
+	char *name2 = "image";
+	char *name3 = "filename";
+	fd = shm_open(name, O_CREAT | O_RDWR, 0666);
+	fd3 = shm_open(name3, O_CREAT | O_RDWR, 0666);
+ 	ftruncate(fd, SIZE);
+ 	ftruncate(fd3, SIZE);
+ 	ptr1 = (char*) mmap(NULL, SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+	ptr2 = (int*)ptr1;
+	ptr2 = ptr2 + 1;
+	ptr3 = ptr2 + 1;
+	ptr4 = ptr3 + 1;
+	ptr6 = (char*) mmap(NULL, SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd3, 0);
+	size_t imageSize = 7000000;
+    	fd2 = shm_open(name2, O_CREAT | O_RDWR, 0666);
+    	ftruncate(fd2, imageSize);
+    	ptr5 = (Mat*)mmap(NULL, imageSize, PROT_READ | PROT_WRITE, MAP_SHARED, fd2, 0);
 	pthread_t ui, other;
-	pthread_create(&ui, NULL, mainWindow, NULL);
-	pthread_create(&other, NULL, mainOther, NULL);
-	pthread_join(ui, NULL);
-	pthread_join(other, NULL);
+	pid_t pid = fork();
+	if(pid == 0) {
+		mainOther();
+	} else {
+		flag = "0";
+		strcpy(ptr1, flag);
+		clicked[0] = 0;
+		*ptr2 = clicked[0];
+                clicked[1] = 0;
+		*ptr3 = clicked[1];
+		mainWindow();
+		usleep(100000);
+	}
+	shm_unlink(name);
+	shm_unlink(name2);
+	shm_unlink(name3);
 }
 
 
