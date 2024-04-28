@@ -4,6 +4,7 @@
 #include <opencv2/opencv.hpp>
 #include <gtk/gtk.h>
 #include "intro.h"
+#include <pthread.h>
 
 using namespace cv;
 
