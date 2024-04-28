@@ -34,7 +34,8 @@ void upload(int event, int x, int y, int flags, void* userdata)
 	if (event == EVENT_LBUTTONDOWN) 
     	{	
         	cout << "Mouse clicked at: (" << x << ", " << y << ")" << endl;
-        	flag2 = true;
+        	flag = "2";
+        	strcpy(ptr1, flag);
     	}
     	
     	if (x > 315*scaledWidth && x < 715*scaledWidth && y > 255*scaledHeight && y < 335*scaledHeight) 
@@ -66,7 +67,15 @@ void upload(int event, int x, int y, int flags, void* userdata)
 }
 
 void uploadOther() {
-	while (!flag3) {
+	while (true) {
+        	pthread_mutex_lock(&threadMutex);
+        	flag = (char*)(ptr1);
+        	cout<<flag<<endl;
+        	if (strcmp(flag, "3") == 0) {
+            		pthread_mutex_unlock(&threadMutex);
+            		break;
+        	}
+        pthread_mutex_unlock(&threadMutex);
         	cout << "Next next Other" << endl;
         	usleep(1000000);
     	}
