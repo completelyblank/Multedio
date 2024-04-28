@@ -9,6 +9,7 @@ using namespace cv;
 
 void drawSlider(Mat &image, int value);
 void onMouse(int event, int x, int y, int flags, void* userdata);
-void mouseCallBack();
+void *mouseCallBack(void *arg);
+void *testing(void *arg);
 
 #endif
