@@ -4,11 +4,7 @@
 #include <iostream>
 using namespace std;
 
-GtkWidget *scale;
-
-void on_scale_changed(int, void*) {
-
-}
+bool filterFlags[9];
 
 void initializeHoveringPNGs() {
 	// load assets
@@ -32,16 +28,28 @@ void initializeHoveringPNGs() {
     	filters[7] = imread("src/Brightness.png");
     	filters[8] = imread("src/Color Grading.png");
     	threadCreated = 0;
+    	
+    	for(int i = 0; i < 9; i++) {
+    		filterFlags[i] = false;
+    	}
+    	
+    	imageRender = false;
 }
 
 void station(int event, int x, int y, int flags, void* userdata) {
-	mouseCordx = x;
-	mouseEvent = event;
     	char *filename = (char*)userdata;
-    	Mat image = imread(filename);
+    	strcpy(ptr6, filename);
+    	if(imageRender == false) {
+    		image = imread(filename);
+    		size_t imageSize = image.total() * image.elemSize();
+    		memcpy(ptr5, image.data, imageSize);
+    		imageRender = true;
+    	}
+    	Mat image2(image.rows, image.cols, image.type(), ptr5);
     	if (event == EVENT_MOUSEMOVE) 
     	{
-    		flag3 = true;
+    		flag = "3";
+        	strcpy(ptr1, flag);
     	}
     	if (event == EVENT_LBUTTONDOWN) 
     	{
@@ -50,33 +58,36 @@ void station(int event, int x, int y, int flags, void* userdata) {
     	
     	if (y > 148*scaledHeight && y < 220*scaledHeight) {
 		if (x > 63*scaledWidth && x < 147*scaledHeight) { // temperature
-			if (!clicked) {
+			if (!clicked[0]) {
 				background = hovering[0];
 				setCursor(gdk_get_default_root_window(), handCursor);
 				if (event == EVENT_LBUTTONDOWN) {
 					background = filters[0];
 					setCursor(gdk_get_default_root_window(), arrowCursor);
-					clicked = true;
+					clicked[0] = 1;
+					*ptr2 = clicked[0];
 				}
 			}
 		} else if (x > 208*scaledWidth && x < 289*scaledHeight) { // tint
-			if (!clicked) {
+			if (!clicked[0]) {
 				background = hovering[1];
 				setCursor(gdk_get_default_root_window(), handCursor);
 				if (event == EVENT_LBUTTONDOWN) {
 					background = filters[1];
 					setCursor(gdk_get_default_root_window(), arrowCursor);
-					clicked = true;
+					clicked[0] = 2;
+					*ptr2 = clicked[0];
 				}
 			}
 		} else if (x > 349*scaledWidth && x < 434*scaledHeight) { // exposure
-			if (!clicked) {
+			if (!clicked[0]) {
 				background = hovering[2];
 				setCursor(gdk_get_default_root_window(), handCursor);
 				if (event == EVENT_LBUTTONDOWN) {
 					background = filters[2];
 					setCursor(gdk_get_default_root_window(), arrowCursor);
-					clicked = true;
+					clicked[0] = 3;
+					*ptr2 = clicked[0];
 				}
 			}
 		} else {
@@ -84,33 +95,36 @@ void station(int event, int x, int y, int flags, void* userdata) {
 		}
 	} else if (y > 264*scaledHeight && y < 334*scaledHeight) {
 		if (x > 63*scaledWidth && x < 147*scaledHeight) { // crop
-			if (!clicked) {
+			if (!clicked[0]) {
 				background = hovering[3];
 				setCursor(gdk_get_default_root_window(), handCursor);
 				if (event == EVENT_LBUTTONDOWN) {
 					background = filters[3];
 					setCursor(gdk_get_default_root_window(), arrowCursor);
-					clicked = true;
+					clicked[0] = 4;
+					*ptr2 = clicked[0];
 				}
 			}
 		} else if (x > 208*scaledWidth && x < 289*scaledHeight) { // preset
-			if (!clicked) {
+			if (!clicked[0]) {
 				background = hovering[4];
 				setCursor(gdk_get_default_root_window(), handCursor);
 				if (event == EVENT_LBUTTONDOWN) {
 					background = filters[4];
 					setCursor(gdk_get_default_root_window(), arrowCursor);
-					clicked = true;
+					clicked[0] = 5;
+					*ptr2 = clicked[0];
 				}
 			}
 		} else if (x > 349*scaledWidth && x < 434*scaledHeight) { // noise reduction
-			if (!clicked) {
+			if (!clicked[0]) {
 				background = hovering[5];
 				setCursor(gdk_get_default_root_window(), handCursor);
 				if (event == EVENT_LBUTTONDOWN) {
 					background = filters[5];
 					setCursor(gdk_get_default_root_window(), arrowCursor);
-					clicked = true;
+					clicked[0] = 6;
+					*ptr2 = clicked[0];
 				}
 			}
 		} else {
@@ -118,82 +132,91 @@ void station(int event, int x, int y, int flags, void* userdata) {
 		}
 	} else if (y > 384*scaledHeight && y < 450*scaledHeight) {
 		if (x > 63*scaledWidth && x < 147*scaledHeight) { // vignette
-			if (!clicked) {
+			if (!clicked[0]) {
 				background = hovering[6];
 				setCursor(gdk_get_default_root_window(), handCursor);
 				if (event == EVENT_LBUTTONDOWN) {
 					background = filters[6];
 					setCursor(gdk_get_default_root_window(), arrowCursor);
-					clicked = true;
+					clicked[0] = 7;
+					*ptr2 = clicked[0];
 				}
 			}
 		} else if (x > 208*scaledWidth && x < 289*scaledHeight) { // brightness
-			if (!clicked) {
+			if (!clicked[0]) {
 				background = hovering[7];
 				setCursor(gdk_get_default_root_window(), handCursor);
 				if (event == EVENT_LBUTTONDOWN) {
 					background = filters[7];
 					setCursor(gdk_get_default_root_window(), arrowCursor);
-					clicked = true;
+					clicked[0] = 8;
+					*ptr2 = clicked[0];
 				}
 			}
 		} else if (x > 349*scaledWidth && x < 434*scaledHeight) { // color grading
-			if (!clicked) {
+			if (!clicked[0]) {
 				background = hovering[8];
 				setCursor(gdk_get_default_root_window(), handCursor);
 				if (event == EVENT_LBUTTONDOWN) {
 					background = filters[8];
 					setCursor(gdk_get_default_root_window(), arrowCursor);
-					clicked = true;
+					clicked[0] = 9;
+					*ptr2 = clicked[0];
 				}
 			}
 		} else {
-			if (!clicked) {
+			if (!clicked[0]) {
 				background = imread("src/Station.png");
 			}
 			setCursor(gdk_get_default_root_window(), arrowCursor);
 		}
 	} else {
-		if (!clicked) {
+		if (!clicked[0]) {
 			background = imread("src/Station.png");
 		}
 		setCursor(gdk_get_default_root_window(), arrowCursor);
 	}
 	
-	if(clicked) {
-		mouseCallBack();
+	if(clicked[0]) {
+		drawSlider(background, sliderValue[clicked[0] - 1]);
 		if(x > 88*scaledWidth && x < 133*scaledWidth && y > 301*scaledHeight && y < 340*scaledHeight){
 			setCursor(gdk_get_default_root_window(), handCursor);
 			if (event == EVENT_LBUTTONDOWN) {
-				if(sliderValue > 140) {
-					sliderValue -= 5;
+				clicked[1] = 1;
+				*ptr3 = clicked[1];
+				if(sliderValue[clicked[0] - 1] > 145) {
+					sliderValue[clicked[0] - 1] -= 5;
+					ptr4[clicked[0] - 1] = sliderValue[clicked[0] - 1];
 				}
 			}
 		}
 		else if(x > 356*scaledWidth && x < 405*scaledWidth && y > 299*scaledHeight && y < 341*scaledHeight){
 			setCursor(gdk_get_default_root_window(), handCursor);
 			if (event == EVENT_LBUTTONDOWN) {
-				if(sliderValue < 350) {
-					sliderValue += 5;
+				clicked[1] = 1;
+				*ptr3 = clicked[1];
+				if(sliderValue[clicked[0] - 1] < 345) {
+					sliderValue[clicked[0] - 1] += 5;
+					ptr4[clicked[0] - 1] = sliderValue[clicked[0] - 1];
 				}
 			}
 		}
-		else if (x > 52*scaledWidth && x < 92*scaledWidth && y > 143*scaledHeight && y < 182*scaledHeight ){
+		else if (x > 52*scaledWidth && x < 92*scaledWidth && y > 143*scaledHeight && y < 182*scaledHeight){
 			setCursor(gdk_get_default_root_window(), handCursor);
 			if (event == EVENT_LBUTTONDOWN) {
 				setCursor(gdk_get_default_root_window(), arrowCursor);
-				clicked = false;
+				clicked[0] = 0;
+				*ptr2 = clicked[0];
 				slider = false;
-				threadCreated = 2;
 			}
 		}
 		else {
-				setCursor(gdk_get_default_root_window(), arrowCursor);
+			setCursor(gdk_get_default_root_window(), arrowCursor);
 		}
 	}
 	
 	resize(background, background, Size(width*0.75, height*0.75));
-	resize(image, image, Size(470, 472));
+	resize(image2, image2, Size(470, 472));
 
 	// Create a main window for displaying the result
     	Mat mainWindow(height*0.75, width*0.75, CV_8UC3, Scalar(51, 138, 255));
@@ -202,7 +225,7 @@ void station(int event, int x, int y, int flags, void* userdata) {
     	int imageX = 520; // Adjust these values as needed
     	int imageY = 16; // Adjust these values as needed
     
-        Rect imageROI(imageX, imageY, image.cols, image.rows);
+        Rect imageROI(imageX, imageY, image2.cols, image2.rows);
         
         // Extract the region of interest from the background image
         Mat backgroundROI = mainWindow(Rect(0, 0, background.cols, background.rows));
@@ -212,16 +235,41 @@ void station(int event, int x, int y, int flags, void* userdata) {
 
         // Place the image on top of the background
         Mat imageRegion = mainWindow(imageROI);
-        image.copyTo(imageRegion);
+        image2.copyTo(imageRegion);
 
 	// Show the result
     	imshow("Multedio", mainWindow);
 }
 
 void rendering() {
-	while (!flag4) {
-        	cout << "next next next other" << endl;
-        	
-        	usleep(1000000);
-	}
+	char *names[9] = {"Temperature 0", "Tint 1", "Exposure 2", "Crop 3", "Preset 4", "Noise 5", "Vignette 6", "Brightness 7", "Color 8"};
+	while (true) {
+        	flag = (char*)(ptr1);
+        	clicked[0] = *ptr2;
+        	clicked[1] = *ptr3;
+        	for(int i = 0; i < 9; i++) {
+        		sliderValue[i] = ptr4[i];
+        	}
+        	if (strcmp(flag, "4") == 0) {
+        		break;
+        	}
+        	//for(int i = 0; i < 9; i++) {
+            		if(filterFlags[7] == false) {
+                		pthread_create(&threadIDs[7], NULL, mouseCallBack, (void*)names[7]);
+                		filterFlags[7] = true;
+            		}
+            		if(filterFlags[2] == false) {
+                		pthread_create(&threadIDs[2], NULL, mouseCallBack, (void*)names[2]);
+                		filterFlags[2] = true;
+            		}
+        	//}
+        	usleep(10000);
+    	}
+	//for(int i = 0; i < 9; i++) {
+        	//if(filterFlags[i] == true) {
+        		pthread_join(threadIDs[7], NULL);
+        		pthread_join(threadIDs[2], NULL);
+        		//filterFlags[i] = false;
+        	//}
+        //}
 }
