@@ -2,7 +2,10 @@
 #include "station.h"
 #include "upload.h"
 #include "getStarted.h"
+#include <fcntl.h>
 #include <iostream>
+#include "brightness.h"
+#include "exposure.h"
 
 using namespace std;
 
@@ -45,34 +48,62 @@ void setCursor(GdkWindow *window, GdkCursor *cursor) //cursor event
 
 
 
-void *mainWindow(void *arg) {
-    // Move your existing code inside this function
-    gtk_init(NULL, NULL);
-    backgroundCode();
-    clicked = false;
-    slider = false;
-    dragging = false;
-    sliderValue = 110;
+void mainWindow() {
+    	backgroundCode();
+	clicked[0] = 0;
+    	clicked[1] = 0;
+    	slider = false;
+    	dragging = false;
+   	for(int i = 0; i < 9; i++) {
+    		sliderValue[i] = 145;
+    		ptr4[i] = sliderValue[i];
+    	}
+    	for(int i = 0; i < 3; i++) {
+    		sliderValue[i] = 245;
+    		ptr4[i] = sliderValue[i];
+    	}
+    	sliderValue[7] = 245;
+    	ptr4[7] = sliderValue[7];
+    
+    	initializeCursors();
+    	initializeHoveringPNGs();
 
-    initializeCursors();
-    initializeHoveringPNGs();
+    	background = imread("src/Multedio.png");
+    	show(background);
+    	setMouseCallback("Multedio", getStarted, NULL);
 
-    background = imread("src/Multedio.png");
-    show(background);
-    setMouseCallback("Multedio", getStarted, nullptr);
+    	// Keep the main loop running
+    	gtk_main();
 
-    // Keep the main loop running
-    gtk_main();
-
-    return NULL;
 }
 
 
-void *mainOther(void *arg) {
-	while (!flag1) {
-        	cout << "Other" << endl;
-        	usleep(1000000);
-    	}
-    	getOther();
-    return NULL;
+void mainOther() {
+	functionMap = {
+	        {"Brightness", adjustBrightness},
+	        {"Exposure", adjustExposure}/*,
+	        {"Temperature", adjustTemperature},
+	        {"Tint", adjustTint},
+	        {"Crop", adjustCrop},
+	        {"Preset", adjustPreset},
+	        {"Noise", adjustNoise},
+	        {"Color", adjustColor},
+	        {"Vignette", adjustVignette}*/
+	};
+	clicked[0] = 0;
+    	clicked[1] = 0;
+    while (true) {
+        pthread_mutex_lock(&threadMutex);
+        flag = (char*)(ptr1);
+        printf("%s\n", flag); 
+        if (strcmp(flag, "1") == 0) {
+            pthread_mutex_unlock(&threadMutex);
+            break;
+        }
+        pthread_mutex_unlock(&threadMutex);
+        cout << "Other" << endl;
+        usleep(1000000);
+    }
+    getOther();
+ 
 }
