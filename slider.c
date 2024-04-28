@@ -7,12 +7,12 @@ using namespace std;
 void drawSlider(Mat &image, int value) {
     	resize(image, image, Size(width*0.75, height*0.75));
         // Draw the rectangle with black border
-        rectangle(image, Point(143, 310), Point(348, 330), Scalar(0, 0, 0), 2); 
+        rectangle(image, Point(scaledWidth*143, scaledHeight*310), Point(scaledWidth*348, scaledHeight*330), Scalar(0, 0, 0), 2); 
         // Draw the rectangle with white interior
-        rectangle(image, Point(145, 312), Point(345, 328), Scalar(255, 255, 255), -1); 
+        rectangle(image, Point(scaledWidth*145, scaledHeight*312), Point(scaledWidth*345, scaledHeight*328), Scalar(255, 255, 255), -1); 
    	
     	// Draw the trackbar slider
-    	rectangle(image, Point(145, 312), Point(value, 328), Scalar(128, 0, 128), -1);
+    	rectangle(image, Point(scaledWidth*145, scaledHeight*312), Point(scaledWidth*value, scaledHeight*328), Scalar(128, 0, 128), -1);
 }
 
 void onMouse(int event, int x, int y, int flags, void* userdata) {
