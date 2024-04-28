@@ -1,5 +1,6 @@
 #include "getStarted.h"
 #include "upload.h"
+#include <unistd.h>
 
 void getStarted(int event, int x, int y, int flags, void* userdata) 
 {
@@ -8,7 +9,6 @@ void getStarted(int event, int x, int y, int flags, void* userdata)
 	
 	if (event == EVENT_LBUTTONDOWN) 
     	{
-    		flag1 = true;
         	cout << "Mouse clicked at: (" << x << ", " << y << ")" << endl;
     	}
 
@@ -17,8 +17,10 @@ void getStarted(int event, int x, int y, int flags, void* userdata)
         	setCursor(gdk_get_default_root_window(), handCursor);
         	background = imread("src/Multedio_Hover.png"); //animation effect
         	if (event == EVENT_LBUTTONDOWN) //if you press the button
-        	{
+        	{	
+        		flag = "1";
             		setCursor(gdk_get_default_root_window(), watchCursor);
+    			strcpy(ptr1, flag);
             		setMouseCallback("Multedio", upload, nullptr);
         	}
         	
@@ -33,7 +35,15 @@ void getStarted(int event, int x, int y, int flags, void* userdata)
 }
 
 void getOther() {
-	while (!flag2) {
+	while (true) {
+        	pthread_mutex_lock(&threadMutex);
+        	flag = (char*)(ptr1);
+       		cout << flag << endl;
+        	if (strcmp(flag, "2") == 0) {
+            		pthread_mutex_unlock(&threadMutex);
+            		break;
+        	}
+        pthread_mutex_unlock(&threadMutex);
         	cout << "Next Other" << endl;
         	usleep(1000000);
     	}
