@@ -278,6 +278,10 @@ void rendering() {
                 		pthread_create(&threadIDs[8], NULL, mouseCallBack, (void*)names[8]);
                 		filterFlags[8] = true;
             		}
+			if(filterFlags[6] == false) {
+                		pthread_create(&threadIDs[6], NULL, mouseCallBack, (void*)names[6]);
+                		filterFlags[6] = true;
+            		}
         	//}
         	usleep(10000);
     	}
@@ -288,6 +292,7 @@ void rendering() {
         		pthread_join(threadIDs[1], NULL);
         		pthread_join(threadIDs[5], NULL);
         		pthread_join(threadIDs[8], NULL);
+			pthread_join(threadIDs[6], NULL);
         		//filterFlags[i] = false;
         	//}
         //}
