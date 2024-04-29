@@ -19,6 +19,7 @@ using namespace std;
 #define READ_END 0
 #define WRITE_END 1
 
+extern int first;
 extern char *ptr1, *ptr6;
 extern int *ptr2, *ptr3, *ptr4;
 extern Mat *ptr5;
