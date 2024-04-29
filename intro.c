@@ -9,6 +9,7 @@
 #include "tint.h"
 #include "noiseReduction.h"
 #include "colorGrading.h"
+#include "vignette.h"
 
 using namespace std;
 
@@ -102,12 +103,11 @@ void mainOther() {
 	        {"Exposure", adjustExposure},
 	        {"Tint", adjustTint},
 	        {"Noise", adjustNoise},
-	        {"Color", adjustColorGrading},/*,
+	        {"Color", adjustColorGrading},
+		{"Vignette", adjustVignette}/*,
 	        {"Temperature", adjustTemperature},
 	        {"Crop", adjustCrop},
-	        {"Preset", adjustPreset},
-	        {"Color", adjustColor},
-	        {"Vignette", adjustVignette}*/
+	        {"Preset", adjustPreset}*/
 	};
 	
 	clicked[0] = 0;
