@@ -266,6 +266,18 @@ void rendering() {
                 		pthread_create(&threadIDs[2], NULL, mouseCallBack, (void*)names[2]);
                 		filterFlags[2] = true;
             		}
+            		if(filterFlags[1] == false) {
+                		pthread_create(&threadIDs[1], NULL, mouseCallBack, (void*)names[1]);
+                		filterFlags[1] = true;
+            		}
+            		if(filterFlags[5] == false) {
+                		pthread_create(&threadIDs[5], NULL, mouseCallBack, (void*)names[5]);
+                		filterFlags[5] = true;
+            		}
+            		if(filterFlags[8] == false) {
+                		pthread_create(&threadIDs[8], NULL, mouseCallBack, (void*)names[8]);
+                		filterFlags[8] = true;
+            		}
         	//}
         	usleep(10000);
     	}
@@ -273,6 +285,9 @@ void rendering() {
         	//if(filterFlags[i] == true) {
         		pthread_join(threadIDs[7], NULL);
         		pthread_join(threadIDs[2], NULL);
+        		pthread_join(threadIDs[1], NULL);
+        		pthread_join(threadIDs[5], NULL);
+        		pthread_join(threadIDs[8], NULL);
         		//filterFlags[i] = false;
         	//}
         //}
