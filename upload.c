@@ -66,18 +66,21 @@ void upload(int event, int x, int y, int flags, void* userdata)
 	show(background);
 }
 
-void uploadOther() {
-	while (true) {
-        	pthread_mutex_lock(&threadMutex);
-        	flag = (char*)(ptr1);
+void uploadOther() 
+{
+	while (true) 
+	{
+        	pthread_mutex_lock(&threadMutex); //CS Section made
+        	flag = (char*)(ptr1); //TypeCasting
         	cout<<flag<<endl;
-        	if (strcmp(flag, "3") == 0) {
-            		pthread_mutex_unlock(&threadMutex);
+        	if (strcmp(flag, "3") == 0) //If Flag is 3  
+        	{
+            		pthread_mutex_unlock(&threadMutex); //Unlock the section
             		break;
         	}
-        pthread_mutex_unlock(&threadMutex);
+        pthread_mutex_unlock(&threadMutex); //if Flag doesnt equal 3 so we unlock the Section so as not to starve the Threads
         	cout << "Next next Other" << endl;
-        	usleep(1000000);
+        	usleep(1000000); //Sleeps so other thread can have the chance
     	}
     	rendering();
 }
