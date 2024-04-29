@@ -246,6 +246,7 @@ void station(int event, int x, int y, int flags, void* userdata)
 }
 
 void rendering() {
+	first = -1;
 	char *names[9] = {"Temperature 0", "Tint 1", "Exposure 2", "Crop 3", "Preset 4", "Noise 5", "Vignette 6", "Brightness 7", "Color 8"};
 	while (true) {
         	flag = (char*)(ptr1);
