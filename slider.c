@@ -21,7 +21,7 @@ void onMouse(int event, int x, int y, int flags, void* userdata) {
 
 void *mouseCallBack(void *arg) {
     char *extracting = (char*)arg;
-
+	Mat image2;
     // function name is separated by space from the index
     char name[15] = {'\0'};
     int i = 0;
@@ -39,17 +39,20 @@ void *mouseCallBack(void *arg) {
         //pthread_mutex_lock(&threadMutex);
         while (true) {
         	cout << index << endl;
-            if (clicked[0] == (index + 1)) {
+            while (clicked[0] == (index + 1)) {   
                 if (clicked[1]) {
                 	clicked[1] = 0;
                     	*ptr3 = clicked[1];
                     	sliderValue[index] = ptr4[index];
                     	cout << sliderValue[index] << endl;
-			image = imread(ptr6);
-			//Mat image2(image.rows, image.cols, image.type(), ptr5); 
                     	it->second(image, sliderValue[index]);
                 }
+                first = index;
             } 
+            if(first == index) {
+            	image = Mat(image.rows, image.cols, image.type(), ptr5);
+            	first = -1;
+            }
             usleep(1000);
         }
         //pthread_mutex_unlock(&threadMutex);
