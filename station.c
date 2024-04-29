@@ -36,27 +36,30 @@ void initializeHoveringPNGs() {
     	imageRender = false;
 }
 
-void station(int event, int x, int y, int flags, void* userdata) {
-    	char *filename = (char*)userdata;
-    	strcpy(ptr6, filename);
-    	if(imageRender == false) {
-    		image = imread(filename);
-    		size_t imageSize = image.total() * image.elemSize();
-    		memcpy(ptr5, image.data, imageSize);
-    		imageRender = true;
-    	}
-    	Mat image2(image.rows, image.cols, image.type(), ptr5);
-    	if (event == EVENT_MOUSEMOVE) 
+void station(int event, int x, int y, int flags, void* userdata) 
+{
+    	char *filename = (char*)userdata; //TypeCasting 
+    	strcpy(ptr6, filename); //Ptr6 has filename ki value 
+    	if(imageRender == false) //If Image has not been rendered 
     	{
-    		flag = "3";
-        	strcpy(ptr1, flag);
+    		image = imread(filename); //read the image 
+    		size_t imageSize = image.total() * image.elemSize(); //allocate size to the image
+    		memcpy(ptr5, image.data, imageSize); //copy into the memory 
+    		imageRender = true; //now image shall be rendered
     	}
-    	if (event == EVENT_LBUTTONDOWN) 
+    	Mat image2(image.rows, image.cols, image.type(), ptr5); //image created which has allocation of number of rows, cols, type, and ptr5 ka object 
+    	if (event == EVENT_MOUSEMOVE) //if the mouse moves
     	{
-        	cout << "Mouse clicked at: (" << x << ", " << y << ")" << endl;
+    		flag = "3"; //flag shall be 3
+        	strcpy(ptr1, flag); //now ptr1 shall have flag ki val which is 3
+    	}
+    	if (event == EVENT_LBUTTONDOWN) //if the left mouse button is clicked 
+    	{
+        	cout << "Mouse clicked at: (" << x << ", " << y << ")" << endl; //we write down coordinates for troubleshooting
     	}
     	
-    	if (y > 148*scaledHeight && y < 220*scaledHeight) {
+    	if (y > 148*scaledHeight && y < 220*scaledHeight) 
+    	{
 		if (x > 63*scaledWidth && x < 147*scaledHeight) { // temperature
 			if (!clicked[0]) {
 				background = hovering[0];
@@ -216,14 +219,15 @@ void station(int event, int x, int y, int flags, void* userdata) {
 	}
 	
 	resize(background, background, Size(width*0.75, height*0.75));
-	resize(image2, image2, Size(470, 472));
+	resize(image2, image2, Size(scaledWidth*470, scaledHeight*472));
+	
 
 	// Create a main window for displaying the result
     	Mat mainWindow(height*0.75, width*0.75, CV_8UC3, Scalar(51, 138, 255));
 
     	// Define the position to place the image on top of the background
-    	int imageX = 520; // Adjust these values as needed
-    	int imageY = 16; // Adjust these values as needed
+    	int imageX = 520 * scaledWidth; // Adjust these values as needed
+    	int imageY = 16 * scaledHeight; // Adjust these values as needed
     
         Rect imageROI(imageX, imageY, image2.cols, image2.rows);
         
