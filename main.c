@@ -15,6 +15,7 @@ using namespace cv;
 using namespace std;
 
 Mat background; //image variable for background (Multedio's background that we show on opening)
+int first;
 GdkCursor *handCursor;
 GdkCursor *arrowCursor;
 GdkCursor *watchCursor;
