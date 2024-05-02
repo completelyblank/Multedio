@@ -9,7 +9,7 @@
 #include "tint.h"
 #include "noiseReduction.h"
 #include "colorGrading.h"
-#include "vignette.h"
+#include "temperature.h"
 
 using namespace std;
 
@@ -81,6 +81,9 @@ void mainWindow()
     
     	sliderValue[8] = 245;
     	ptr4[8] = sliderValue[8];
+    	
+    	sliderValue[0] = 245;
+    	ptr4[0] = sliderValue[0];
     
     
     	initializeCursors(); //Cursors made
@@ -104,10 +107,11 @@ void mainOther() {
 	        {"Tint", adjustTint},
 	        {"Noise", adjustNoise},
 	        {"Color", adjustColorGrading},
-		{"Vignette", adjustVignette}/*,
-	        {"Temperature", adjustTemperature},
+	        {"Temperature", adjustTemperature}/*
 	        {"Crop", adjustCrop},
-	        {"Preset", adjustPreset}*/
+	        {"Preset", adjustPreset},
+	        {"Color", adjustColor},
+	        {"Vignette", adjustVignette}*/
 	};
 	
 	clicked[0] = 0;
