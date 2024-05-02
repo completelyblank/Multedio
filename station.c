@@ -246,9 +246,6 @@ void station(int event, int x, int y, int flags, void* userdata)
 }
 
 void rendering() {
-	first = -1;
-	image = imread(ptr6);
-	memcpy(ptr5, image.data, image.total() * image.elemSize());
 	char *names[9] = {"Temperature 0", "Tint 1", "Exposure 2", "Crop 3", "Preset 4", "Noise 5", "Vignette 6", "Brightness 7", "Color 8"};
 	while (true) {
         	flag = (char*)(ptr1);
@@ -281,9 +278,9 @@ void rendering() {
                 		pthread_create(&threadIDs[8], NULL, mouseCallBack, (void*)names[8]);
                 		filterFlags[8] = true;
             		}
-			if(filterFlags[6] == false) {
-                		pthread_create(&threadIDs[6], NULL, mouseCallBack, (void*)names[6]);
-                		filterFlags[6] = true;
+            		if(filterFlags[0] == false) {
+                		pthread_create(&threadIDs[0], NULL, mouseCallBack, (void*)names[0]);
+                		filterFlags[0] = true;
             		}
         	//}
         	usleep(10000);
@@ -295,7 +292,7 @@ void rendering() {
         		pthread_join(threadIDs[1], NULL);
         		pthread_join(threadIDs[5], NULL);
         		pthread_join(threadIDs[8], NULL);
-			pthread_join(threadIDs[6], NULL);
+        		pthread_join(threadIDs[0], NULL);
         		//filterFlags[i] = false;
         	//}
         //}
