@@ -5,7 +5,7 @@
 using namespace cv;
 using namespace std;
 
-void adjustVignette(Mat& imageInput, int sliderValue) {
+void adjustVignette(Mat& imageInput, int sliderValue, int previous) {
     double strength = static_cast<double>(sliderValue - 145) / 200;
     size_t imageSize = imageInput.total() * imageInput.elemSize();
 
@@ -49,4 +49,3 @@ void adjustVignette(Mat& imageInput, int sliderValue) {
     // Update the shared memory with the adjusted image
     memcpy(ptr5, result.data, imageSize);
 }
-
