@@ -5,6 +5,6 @@
 #include <gtk/gtk.h>
 #include "intro.h"
 
-void adjustVignette(Mat& image, int sliderValue);
+void adjustVignette(Mat& imageInput, int sliderValue, int previous);
 
 #endif
