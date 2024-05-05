@@ -5,6 +5,7 @@
 #include <gtk/gtk.h>
 #include "intro.h"
 
-void adjustNoise(Mat& image, int sliderValue);
+void adjustNoise(Mat& image, int sliderValue, int previous);
+void adjustNoisePreset(int sliderValue, int previous);
 
 #endif
