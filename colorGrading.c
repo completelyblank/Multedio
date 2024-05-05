@@ -7,15 +7,15 @@ using namespace std;
 
 void adjustColorGrading(Mat& imageInput, int sliderValue, int previous) {
     // Calculate image size
-    size_t imageSize = imageInput.total() * imageInput.elemSize();
+    size_t imageSize = imageInput.total() * imageInput.elemSize(); //number of elements * individual size
 
     // Convert the input image to LAB color space
-    Mat labImage;
-    cvtColor(imageInput, labImage, COLOR_BGR2Lab);
+    Mat labImage; //datastructure to hold image for reflection of slider values
+    cvtColor(imageInput, labImage, COLOR_BGR2Lab); 
 
     // Split the LAB image into channels
     vector<Mat> labChannels;
-    split(labImage, labChannels);
+    split(labImage, labChannels); //channels split into color channels
 
     // Normalize slider value to range [-50, 50]
     double normalizedSliderValue = (static_cast<double>(sliderValue - previous) / 200.0) * 100.0;
