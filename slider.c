@@ -54,17 +54,17 @@ void *mouseCallBack(void *arg) {
             		ptr4[index] = sliderValue[index];
             	}
             	previous[index] = sliderValue[index];
-            	Mat tempImage(image.rows, image.cols, image.type());
-		memcpy(tempImage.data, ptr5, tempImage.total() * tempImage.elemSize());		
-		image = tempImage.clone();
+            	Mat tempImage(image.rows, image.cols, image.type()); //temporary image alotted dimensions and type
+		memcpy(tempImage.data, ptr5, tempImage.total() * tempImage.elemSize());	//memory copied from ptr to temp Image	
+		image = tempImage.clone(); //image clones the temp image to reflect the settings
             	first = -1;
             }
             if(*ptr7 == 1) {
             	sliderValue[index] = ptr4[index];
             	previous[index] = sliderValue[index];
-            	Mat tempImage(image.rows, image.cols, image.type());
-		memcpy(tempImage.data, ptr5, tempImage.total() * tempImage.elemSize());		
-		image = tempImage.clone();
+            	Mat tempImage(image.rows, image.cols, image.type());  //temporary image alotted dimensions and type
+		memcpy(tempImage.data, ptr5, tempImage.total() * tempImage.elemSize()); //memory copied from ptr to temp Image	
+		image = tempImage.clone(); //image clones the temp image to reflect the settings
 		*ptr7 = 0;
             }
             usleep(100000);
