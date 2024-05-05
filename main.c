@@ -14,8 +14,9 @@
 using namespace cv;
 using namespace std;
 
+Mat copyPresetImage;
 Mat background; //image variable for background (Multedio's background that we show on opening)
-int first;
+Mat presetImage;
 GdkCursor *handCursor;
 GdkCursor *arrowCursor;
 GdkCursor *watchCursor;
@@ -31,7 +32,7 @@ int sliderValue[9];
 bool dragging;
 int threadCreated;
 pthread_t threadID;
-int imageRender;
+int imageRender, first;
 int mouseEvent;
 pthread_mutex_t threadMutex;
 char *flag;
@@ -41,9 +42,10 @@ Mat image;
 int fd[2];
 bool written;
 char *ptr1, *ptr6; 
-int *ptr2, *ptr3, *ptr4;
-Mat *ptr5;
-map<string, function<void(Mat&, int)>> functionMap;
+int *ptr2, *ptr3, *ptr4, *ptr7;
+void *ptr5;
+map<string, function<void(Mat&, int, int)>> functionMap;
+int previous[9];
 
 int main() 
 {  
@@ -62,11 +64,12 @@ int main()
 	ptr2 = ptr2 + 1;
 	ptr3 = ptr2 + 1;
 	ptr4 = ptr3 + 1;
+	ptr7 = ptr4 + 1;
 	ptr6 = (char*) mmap(NULL, SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd3, 0);
-	size_t imageSize = 7000000;
+	size_t imageSize = 70000000;
     	fd2 = shm_open(name2, O_CREAT | O_RDWR, 0666);
     	ftruncate(fd2, imageSize);
-    	ptr5 = (Mat*)mmap(NULL, imageSize, PROT_READ | PROT_WRITE, MAP_SHARED, fd2, 0);
+    	ptr5 = mmap(NULL, imageSize, PROT_READ | PROT_WRITE, MAP_SHARED, fd2, 0);
 	pthread_t ui, other;
 	pid_t pid = fork();
 	if(pid == 0) {
@@ -85,6 +88,3 @@ int main()
 	shm_unlink(name2);
 	shm_unlink(name3);
 }
-
-
-
