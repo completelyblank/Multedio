@@ -2,6 +2,26 @@
 
 void upload(int event, int x, int y, int flags, void* userdata);
 
+char* openDirectory(GtkWidget *widget, gpointer data) {
+    GtkWidget *dialog;
+    char *dirname = nullptr;
+
+    dialog = gtk_file_chooser_dialog_new(
+        "Open Directory", NULL, GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
+        "_Cancel", GTK_RESPONSE_CANCEL,
+        "_Open", GTK_RESPONSE_ACCEPT, NULL);
+
+    if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT) {
+        dirname = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+        gtk_widget_destroy(dialog);
+        return dirname;
+    } else {
+        gtk_widget_destroy(dialog);
+        return nullptr;
+    }
+}
+
+
 char* openFile(GtkWidget *widget, gpointer data) //selects image file and displays in open window
 {
 	backgroundCode();
@@ -38,49 +58,55 @@ void upload(int event, int x, int y, int flags, void* userdata)
         	strcpy(ptr1, flag);
     	}
     	
-    	if (x > 315*scaledWidth && x < 715*scaledWidth && y > 255*scaledHeight && y < 335*scaledHeight) 
+    	if (x > 153*scaledWidth && x < 341*scaledWidth && y > 133*scaledHeight && y < 251*scaledHeight) 
     	{	
     		setCursor(gdk_get_default_root_window(), handCursor);
-        	background = imread("src/Upload Hover.png"); //animation effect
+        	background = imread("src/Upload_Single.jpg"); //animation effect
         	if (event == EVENT_LBUTTONDOWN) //if you press the button
         	{
             		char* filename = openFile(nullptr, nullptr);
             		if (filename != nullptr) {
             			setMouseCallback("Multedio", station, filename);
             		}
-        	} /*else 
-        	{
-			GdkDragContext* drag_context = (GdkDragContext*)userdata;
-            		GtkSelectionData* data = gdk_drag_context_get_selection(drag_context);
-            		gchar* uri_list = (gchar*)gtk_selection_data_get_text(data);
-            		filename = g_filename_from_uri(uri_list, NULL, NULL);
-            		setMouseCallback("Multedio", station, filename);       	
-        	}*/
+        	}
     	} 
+    	else if (x > 576*scaledWidth && x < 776*scaledWidth && y > 149*scaledHeight && y < 345*scaledHeight)
+    	{
+    		setCursor(gdk_get_default_root_window(), handCursor);
+        	background = imread("src/Upload_Batch.jpg"); //animation effect
+        	if (event == EVENT_LBUTTONDOWN) //if you press the button
+        	{
+        		char* dirname = openDirectory(nullptr, nullptr);
+            		if (dirname != nullptr) {
+            			setMouseCallback("Multedio", batchStation, dirname);
+            		}
+        	}
+    	}
     	else //if cursor not on button
     	{
         	setCursor(gdk_get_default_root_window(), arrowCursor);
-        	background = imread("src/Upload.png"); 
+        	background = imread("src/Upload.jpg"); 
     	}
 	
 	show(background);
 }
 
-void uploadOther() 
-{
-	while (true) 
-	{
-        	pthread_mutex_lock(&threadMutex); //CS Section made
-        	flag = (char*)(ptr1); //TypeCasting
+void uploadOther() {
+	while (true) {
+        	pthread_mutex_lock(&threadMutex);
+        	flag = (char*)(ptr1);
         	cout<<flag<<endl;
-        	if (strcmp(flag, "3") == 0) //If Flag is 3  
-        	{
-            		pthread_mutex_unlock(&threadMutex); //Unlock the section
+        	if (strcmp(flag, "3") == 0 || strcmp(flag, "4") == 0) {
+            		pthread_mutex_unlock(&threadMutex);
             		break;
         	}
-        pthread_mutex_unlock(&threadMutex); //if Flag doesnt equal 3 so we unlock the Section so as not to starve the Threads
+        pthread_mutex_unlock(&threadMutex);
         	cout << "Next next Other" << endl;
-        	usleep(1000000); //Sleeps so other thread can have the chance
+        	usleep(1000000);
     	}
-    	rendering();
+    	if(strcmp(flag, "3") == 0) {
+    		rendering();
+    	} else if(strcmp(flag, "4") == 0) {
+    		batchOther();
+    	}
 }
