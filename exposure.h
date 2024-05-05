@@ -5,6 +5,7 @@
 #include <gtk/gtk.h>
 #include "intro.h"
 
-void adjustExposure(Mat& image, int sliderValue);
+void adjustExposure(Mat& image, int sliderValue, int previous);
+void adjustExposurePreset(int sliderValue, int previous);
 
 #endif
