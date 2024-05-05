@@ -1,16 +1,16 @@
 #include <opencv2/opencv.hpp>
 #include <iostream>
-#include "brightness.h"
+#include "temperature.h"
 
 using namespace cv;
 using namespace std;
 
-void adjustTemperature(Mat& imageInput, int sliderValue) {
+void adjustTemperature(Mat& imageInput, int sliderValue, int previous) {
     // Calculate image size
     size_t imageSize = imageInput.total() * imageInput.elemSize();
     
     // Calculate temperature factor
-    double temperatureFactor = (sliderValue - 245) / 100.0; // Scale slider value to range -1.0 to 1.0
+    double temperatureFactor = (sliderValue - previous) / 200.0; // Scale slider value to range -1.0 to 1.0
     cout << "Temperature Factor: " << temperatureFactor << endl; // Debug print
     
     // Adjust temperature
@@ -27,3 +27,20 @@ void adjustTemperature(Mat& imageInput, int sliderValue) {
     memcpy(ptr5, adjustedImage.data, imageSize);
 }
 
+void adjustTemperaturePreset(int sliderValue, int previous) {
+    // Calculate image size
+    size_t imageSize = copyPresetImage.total() * copyPresetImage.elemSize();
+    
+    // Calculate temperature factor
+    double temperatureFactor = (sliderValue - previous) / 200.0; // Scale slider value to range -1.0 to 1.0
+    cout << "Temperature Factor: " << temperatureFactor << endl; // Debug print
+    
+    // Adjust temperature
+    if (temperatureFactor > 0.0) {
+        // Increase the red and green channels for warmer temperature
+        copyPresetImage += Scalar(0, 255 * temperatureFactor, 255 * temperatureFactor);
+    } else if (temperatureFactor < 0.0) {
+        // Increase the blue channel for cooler temperature
+        copyPresetImage += Scalar(-255 * temperatureFactor, -255 * temperatureFactor, 0);
+    }
+}
