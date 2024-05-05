@@ -55,25 +55,25 @@ int main()
 	char *name = "SHM_OBJECT";
 	char *name2 = "image";
 	char *name3 = "filename";
-	fd = shm_open(name, O_CREAT | O_RDWR, 0666);
-	fd3 = shm_open(name3, O_CREAT | O_RDWR, 0666);
- 	ftruncate(fd, SIZE);
- 	ftruncate(fd3, SIZE);
- 	ptr1 = (char*) mmap(NULL, SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+	fd = shm_open(name, O_CREAT | O_RDWR, 0666); //shared memory opened
+	fd3 = shm_open(name3, O_CREAT | O_RDWR, 0666); //shared memory opened
+ 	ftruncate(fd, SIZE); //truncated according to size 
+ 	ftruncate(fd3, SIZE); //truncated according to size 
+ 	ptr1 = (char*) mmap(NULL, SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0); //memory mapped for reading and writing
 	ptr2 = (int*)ptr1;
 	ptr2 = ptr2 + 1;
 	ptr3 = ptr2 + 1;
 	ptr4 = ptr3 + 1;
 	ptr7 = ptr4 + 1;
-	ptr6 = (char*) mmap(NULL, SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd3, 0);
-	size_t imageSize = 70000000;
-    	fd2 = shm_open(name2, O_CREAT | O_RDWR, 0666);
-    	ftruncate(fd2, imageSize);
-    	ptr5 = mmap(NULL, imageSize, PROT_READ | PROT_WRITE, MAP_SHARED, fd2, 0);
+	ptr6 = (char*) mmap(NULL, SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd3, 0); //memory mapped for reading and writing
+	size_t imageSize = 70000000; //image size declared for maximum alottment
+    	fd2 = shm_open(name2, O_CREAT | O_RDWR, 0666); //shared memory opened
+    	ftruncate(fd2, imageSize); //truncated according to image size
+    	ptr5 = mmap(NULL, imageSize, PROT_READ | PROT_WRITE, MAP_SHARED, fd2, 0); //memory map alotted to pointer for usage in other functions
 	pthread_t ui, other;
-	pid_t pid = fork();
+	pid_t pid = fork(); //process created
 	if(pid == 0) {
-		mainOther();
+		mainOther(); //function called if first process
 	} else {
 		flag = "0";
 		strcpy(ptr1, flag);
@@ -84,7 +84,7 @@ int main()
 		mainWindow();
 		usleep(100000);
 	}
-	shm_unlink(name);
-	shm_unlink(name2);
-	shm_unlink(name3);
+	shm_unlink(name); //when work done, shared memory released
+	shm_unlink(name2); //when work done, shared memory released
+	shm_unlink(name3); //when work done, shared memory released
 }
