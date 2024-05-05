@@ -19,13 +19,13 @@ void getStarted(int event, int x, int y, int flags, void* userdata)
         	if (event == EVENT_LBUTTONDOWN) //if you press the button
         	{	
         		flag = "1";
-            		setCursor(gdk_get_default_root_window(), watchCursor);
+            		setCursor(gdk_get_default_root_window(), watchCursor); //cursor changed
     			strcpy(ptr1, flag);
             		setMouseCallback("Multedio", upload, nullptr);
         	}
         	
     	} 
-    	else
+    	else //if not on button
     	{
         	setCursor(gdk_get_default_root_window(), arrowCursor);
         	background = imread("src/Intro.jpg"); 
@@ -34,16 +34,16 @@ void getStarted(int event, int x, int y, int flags, void* userdata)
     	show(background);
 }
 
-void getOther() {
+void getOther() { //for knowing that next function works
 	while (true) {
         	pthread_mutex_lock(&threadMutex);
         	flag = (char*)(ptr1);
-       		cout << flag << endl;
+       		cout << flag << endl; //debug and know
         	if (strcmp(flag, "2") == 0) {
-            		pthread_mutex_unlock(&threadMutex);
+            		pthread_mutex_unlock(&threadMutex); //threads can access
             		break;
         	}
-        pthread_mutex_unlock(&threadMutex);
+        pthread_mutex_unlock(&threadMutex); //condition has passed, unlock the thread
         	cout << "Next Other" << endl;
         	usleep(1000000);
     	}
