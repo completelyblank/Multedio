@@ -61,16 +61,16 @@ void mainWindow() {
     		ptr4[i] = sliderValue[i];
     	}
     	
-    	for(int i = 0; i < 3; i++) 
+    	for(int i = 0; i < 3; i++)  //3 functions have slider values in between (temperature, tint, exposure)
     	{
     		sliderValue[i] = 245;
     		ptr4[i] = sliderValue[i];
     	}
     	
-    	sliderValue[7] = 245;
+    	sliderValue[7] = 245; //function has slider values in between (brightness
     	ptr4[7] = sliderValue[7];
     
-    	sliderValue[8] = 245;
+    	sliderValue[8] = 245;  //function has slider values in between (color grading)
     	ptr4[8] = sliderValue[8];
     
     	initializeCursors();
@@ -88,7 +88,7 @@ void mainWindow() {
 
 
 void mainOther() {
-	functionMap = {
+	functionMap = { //function map has string as key and the functions as values that will be used 
 	        {"Brightness", adjustBrightness},
 	        {"Exposure", adjustExposure},
 	        {"Tint", adjustTint},
@@ -99,17 +99,17 @@ void mainOther() {
 	        {"Temperature", adjustTemperature},
 	        {"Preset", adjustPreset}
 	};
-	clicked[0] = 0;
-    	clicked[1] = 0;
+	clicked[0] = 0; //flag //not clicked
+    	clicked[1] = 0; //flag //clicked
     while (true) {
-        pthread_mutex_lock(&threadMutex);
-        flag = (char*)(ptr1);
+        pthread_mutex_lock(&threadMutex); //CS Section 
+        flag = (char*)(ptr1); //type cast so we can read aage
         printf("%s\n", flag); 
-        if (strcmp(flag, "1") == 0) {
+        if (strcmp(flag, "1") == 0) { //
             pthread_mutex_unlock(&threadMutex);
             break;
         }
-        pthread_mutex_unlock(&threadMutex);
+        pthread_mutex_unlock(&threadMutex); 
         cout << "Other" << endl;
         usleep(1000000);
     }
