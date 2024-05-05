@@ -21,7 +21,6 @@ void onMouse(int event, int x, int y, int flags, void* userdata) {
 
 void *mouseCallBack(void *arg) {
     char *extracting = (char*)arg;
-	Mat image2;
     // function name is separated by space from the index
     char name[15] = {'\0'};
     int i = 0;
@@ -38,22 +37,37 @@ void *mouseCallBack(void *arg) {
     if (it != functionMap.end()) {
         //pthread_mutex_lock(&threadMutex);
         while (true) {
-        	cout << index << endl;
-            while (clicked[0] == (index + 1)) {   
+            while (clicked[0] == (index + 1)) {  
                 if (clicked[1]) {
                 	clicked[1] = 0;
                     	*ptr3 = clicked[1];
                     	sliderValue[index] = ptr4[index];
                     	cout << sliderValue[index] << endl;
-                    	it->second(image, sliderValue[index]);
+                    	it->second(image, sliderValue[index], previous[index]);
                 }
                 first = index;
             } 
             if(first == index) {
-            	image = Mat(image.rows, image.cols, image.type(), ptr5);
+            	cout << "image saved by " << name << endl;
+            	if(index == 4) {
+            		sliderValue[index] = 145;
+            		ptr4[index] = sliderValue[index];
+            	}
+            	previous[index] = sliderValue[index];
+            	Mat tempImage(image.rows, image.cols, image.type());
+		memcpy(tempImage.data, ptr5, tempImage.total() * tempImage.elemSize());		
+		image = tempImage.clone();
             	first = -1;
             }
-            usleep(1000);
+            if(*ptr7 == 1) {
+            	sliderValue[index] = ptr4[index];
+            	previous[index] = sliderValue[index];
+            	Mat tempImage(image.rows, image.cols, image.type());
+		memcpy(tempImage.data, ptr5, tempImage.total() * tempImage.elemSize());		
+		image = tempImage.clone();
+		*ptr7 = 0;
+            }
+            usleep(100000);
         }
         //pthread_mutex_unlock(&threadMutex);
     } else {
@@ -61,11 +75,4 @@ void *mouseCallBack(void *arg) {
     }
 
     return NULL;
-}
-
-
-void* testing(void *arg) {
-	cout << "testing" << endl;
-	
-	return NULL;
 }
