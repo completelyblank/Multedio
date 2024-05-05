@@ -264,7 +264,7 @@ void station(int event, int x, int y, int flags, void* userdata) {
 		setCursor(gdk_get_default_root_window(), arrowCursor);
 	}
 	
-	if(clicked[0] && clicked[0] != 5) {
+	if(clicked[0] && clicked[0] != 5) { //undo
 		if(!once) {
 			sliderUndo.push(sliderValue[clicked[0] - 1]);
 			indexUndo.push(clicked[0]);
@@ -298,7 +298,7 @@ void station(int event, int x, int y, int flags, void* userdata) {
 				}
 			}
 		}
-		else if (x > 52*scaledWidth && x < 92*scaledWidth && y > 143*scaledHeight && y < 182*scaledHeight){
+		else if (x > 52*scaledWidth && x < 92*scaledWidth && y > 143*scaledHeight && y < 182*scaledHeight){ //redo
 			setCursor(gdk_get_default_root_window(), handCursor);
 			if (event == EVENT_LBUTTONDOWN) {
 				setCursor(gdk_get_default_root_window(), arrowCursor);
