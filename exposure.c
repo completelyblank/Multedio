@@ -7,7 +7,7 @@ using namespace std;
 
 void adjustExposure(Mat& imageInput, int sliderValue, int previous) {
 	// Calculate image size
-	size_t imageSize = imageInput.total() * imageInput.elemSize();
+	size_t imageSize = imageInput.total() * imageInput.elemSize(); //number of elements * individual element size
     	double exposureFactor = (sliderValue - previous) / 200.0; // Scale slider value to range -1.0 to 1.0
     	cout << "Exposure Factor: " << exposureFactor << endl; // Debug print
     	Mat adjustedImage;
@@ -18,7 +18,7 @@ void adjustExposure(Mat& imageInput, int sliderValue, int previous) {
 
 void adjustExposurePreset(int sliderValue, int previous) {
 	// Calculate image size
-	size_t imageSize = copyPresetImage.total() * copyPresetImage.elemSize();
+	size_t imageSize = copyPresetImage.total() * copyPresetImage.elemSize(); //number of elements * individual element size
     	double exposureFactor = (sliderValue - previous) / 200.0; // Scale slider value to range -1.0 to 1.0
     	cout << "Exposure Factor: " << exposureFactor << endl; // Debug print
    	copyPresetImage.convertTo(copyPresetImage, -1, 1.0 + exposureFactor, 0);
