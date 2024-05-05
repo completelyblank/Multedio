@@ -5,6 +5,7 @@
 #include <gtk/gtk.h>
 #include "intro.h"
 
-void adjustBrightness(Mat& image, int sliderValue);
+void adjustBrightness(Mat& image, int sliderValue, int previous);
+void adjustBrightnessPreset(int sliderValue, int previous);
 
 #endif
