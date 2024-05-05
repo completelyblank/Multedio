@@ -5,6 +5,7 @@
 #include <gtk/gtk.h>
 #include "intro.h"
 
-void adjustColorGrading(Mat& image, int sliderValue);
+void adjustColorGrading(Mat& image, int sliderVal, int previous);
+void adjustColorGradingPreset(int sliderVal, int previous);
 
 #endif
