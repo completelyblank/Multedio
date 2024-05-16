@@ -1,7 +1,4 @@
-!![image](https://github.com/completelyblank/Multedio/assets/105001837/efccf6e9-ee1e-4f5b-9d6c-78438d58770d)
-
-
-
+![image](https://github.com/completelyblank/Multedio/assets/105001837/f212b10e-19db-4cb6-92f8-dc19428fccb0)
 
 # Multedio - Lightroom Duplicate Project
 
