@@ -1,4 +1,5 @@
-![WhatsApp Image 2024-03-22 at 16 47 01_a2bbaeb8](https://github.com/completelyblank/Multedio/assets/105001837/5d6c269c-01d9-464b-a9ee-19913eb5e5c8)
+![WhatsApp Image 2024-03-22 at 16 47 01_a2bbaeb8](![image](https://github.com/completelyblank/Multedio/assets/105001837/a8536972-d24d-4cf5-807d-b216fc2a9564)
+)
 
 
 # Multedio - Lightroom Duplicate Project
