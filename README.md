@@ -1,6 +1,4 @@
-![image](https://github.com/completelyblank/Multedio/assets/105001837/f212b10e-19db-4cb6-92f8-dc19428fccb0)
-
-# Multedio - Lightroom Duplicate Project:
+# Multedio - Lightroom Duplicate Project
 
 ## Partners:
 - Muhammad Raza Khan ([completelyblank](https://github.com/completelyblank))
@@ -8,17 +6,15 @@
 - Amna Mubashir ([Amnamubashir](https://github.com/Amnamubashir))
 
 ## Project Description:
-
 Multedio is our ambitious project aimed at creating a feature-rich Lightroom duplicate. Leveraging GTK and OpenCV libraries in C, we intend to enhance the user experience with advanced features such as presets, brightness adjustments, opacity changes, grayscale transformations, and more. The Figma-designed user interface (UI) will be seamlessly implemented using GTK, providing a visually appealing and intuitive platform for image editing. Our project delves into key operating system (OS) concepts, including multiprocessing, interprocess communication (IPC), multithreading, and other relevant aspects.
 
 ## Showcase:
-
-https://github.com/completelyblank/Multedio/blob/main/src/multedio_show.mp4
+[Watch the introductory video](https://github.com/completelyblank/Multedio/blob/main/src/multedio_show.mp4)
 
 ## Project Imaginary:
-
 ### Take a sneak peek at our project's introductory base:
-![](https://github.com/completelyblank/Multedio/blob/main/src/Multedio_Open.gif)
+![Multedio Interface](https://github.com/completelyblank/Multedio/blob/main/src/Multedio_Open.gif)
+
 ### List of Components:
 
 1. **User Interface Design (Figma):**
@@ -31,7 +27,7 @@ https://github.com/completelyblank/Multedio/blob/main/src/multedio_show.mp4
    - Set up project structure for easy navigation.
    - Develop basic UI components using GTK.
    - Integrate OpenCV for image processing.
-   - Integrate a Formula using GTK and direct porportion to resize to different Screen Sizes
+   - Integrate a formula using GTK and direct proportion to resize to different screen sizes.
    - Implement robust error handling and memory management.
 
 3. **Features:**
@@ -41,7 +37,7 @@ https://github.com/completelyblank/Multedio/blob/main/src/multedio_show.mp4
    - Cropping & rotation
    - Noise reduction
    - Sharpening
-   - Revert to original & Go to latest
+   - Revert to original & go to latest
    - Presets
 
 4. **Operating System Concepts (Simplified):**
@@ -62,7 +58,6 @@ https://github.com/completelyblank/Multedio/blob/main/src/multedio_show.mp4
    - Include troubleshooting tips for common user issues.
 
 ### How to Run (Linux):
-
 1. Open a terminal.
 2. Navigate to the project directory.
 3. Install GTK and OpenCV libraries for Linux (Commands may vary based on the Linux distribution).
@@ -82,9 +77,8 @@ https://github.com/completelyblank/Multedio/blob/main/src/multedio_show.mp4
 
 ---
 
-This readme file serves as a roadmap for the Multedio project, highlighting our goals, progress, and future plans. Regular collaboration and feedback sessions will play a crucial role in the successful development of this innovative Lightroom duplicate.
+This `README.md` file serves as a roadmap for the Multedio project, highlighting our goals, progress, and future plans. Regular collaboration and feedback sessions will play a crucial role in the successful development of this innovative Lightroom duplicate.
 
 **Make sure to check out our [GitHub repository](https://github.com/completelyblank/Multedio) for the latest updates and contributions!**
 
 ---
-
