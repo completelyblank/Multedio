@@ -1,15 +1,19 @@
 ![image](https://github.com/completelyblank/Multedio/assets/105001837/f212b10e-19db-4cb6-92f8-dc19428fccb0)
 
-# Multedio - Lightroom Duplicate Project
+# Multedio - Lightroom Duplicate Project:
 
-## Partners
+## Partners:
 - Muhammad Raza Khan ([completelyblank](https://github.com/completelyblank))
 - Amna Shah ([amnashah110](https://github.com/amnashah110))
 - Amna Mubashir ([Amnamubashir](https://github.com/Amnamubashir))
 
-## Project Description
+## Project Description:
 
 Multedio is our ambitious project aimed at creating a feature-rich Lightroom duplicate. Leveraging GTK and OpenCV libraries in C, we intend to enhance the user experience with advanced features such as presets, brightness adjustments, opacity changes, grayscale transformations, and more. The Figma-designed user interface (UI) will be seamlessly implemented using GTK, providing a visually appealing and intuitive platform for image editing. Our project delves into key operating system (OS) concepts, including multiprocessing, interprocess communication (IPC), multithreading, and other relevant aspects.
+
+## Showcase:
+
+https://github.com/completelyblank/Multedio/blob/main/src/multedio_show.mp4
 
 ## Project Imaginary:
 
@@ -84,4 +88,3 @@ This readme file serves as a roadmap for the Multedio project, highlighting our 
 
 ---
 
-Feel free to adjust or expand upon this README according to your project's needs!
